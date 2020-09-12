@@ -20,6 +20,8 @@
       <groupId>corejava</groupId>
       <artifactId>console</artifactId>
       <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/src/lib/console-1.0.jar</systemPath>
     </dependency>
 
     <dependency>
