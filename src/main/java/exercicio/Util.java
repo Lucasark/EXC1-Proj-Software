@@ -35,7 +35,8 @@ public class Util
 	}
 
 	public static Date strToDate(String umaData)
-	{	String dia = umaData.substring(0,2);
+	{
+		String dia = umaData.substring(0,2);
 		String mes = umaData.substring(3,5);
 		String ano = umaData.substring(6,10);
 
