@@ -1,23 +1,29 @@
 package exercicio;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 import java.sql.Date;
 
-import javax.persistence.*;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 @Entity
-@DynamicInsert
-@DynamicUpdate
-@Table(name = "produto")
+@Table(name = "produto_lock_otimista")
+
 public class Produto {
     private Long id;
     private String nome;
     private double lanceMinimo;
     private Date dataCadastro;
     private Date dataVenda;
+
+//==>
+    private int versao;
 
     // ********* Construtores *********
 
@@ -74,6 +80,7 @@ public class Produto {
     public String getDataVendaMasc() {
         return Util.dateToStr(dataVenda);
     }
+
 
     // ********* Métodos do Tipo Set *********
 

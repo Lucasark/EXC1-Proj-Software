@@ -1,5 +1,6 @@
 package exercicio;
 
+
 import java.util.List;
 
 import corejava.Console;
@@ -22,25 +23,31 @@ public class Principal {
             System.out.println("4. Listar todos os produtos");
             System.out.println("5. Sair");
 
-            int opcao = Console.readInt('\n' + "Digite um número entre 1 e 5:");
+            int opcao = Console.readInt('\n' +
+                    "Digite um número entre 1 e 5:");
 
             switch (opcao) {
                 case 1: {
-                    nome = Console.readLine('\n' + "Informe o nome do produto: ");
-                    lanceMinimo = Console.readDouble("Informe o valor do lance mínimo: ");
-                    dataCadastro = Console.readLine("Informe a data de cadastramento do produto: ");
+                    nome = Console.readLine('\n' +
+                            "Informe o nome do produto: ");
+                    lanceMinimo = Console.readDouble(
+                            "Informe o valor do lance mínimo: ");
+                    dataCadastro = Console.readLine(
+                            "Informe a data de cadastramento do produto: ");
 
                     umProduto = new Produto(nome, lanceMinimo, Util.strToDate(dataCadastro));
 
-                    produtoDAO.inclui(umProduto);
+                    long numero = produtoDAO.inclui(umProduto);
 
-                    System.out.println('\n' + "Produto número " + umProduto.getId() + " incluído com sucesso!");
+                    System.out.println('\n' + "Produto número " +
+                            numero + " incluído com sucesso!");
 
                     break;
                 }
 
                 case 2: {
-                    int resposta = Console.readInt('\n' + "Digite o número do produto que você deseja alterar: ");
+                    int resposta = Console.readInt('\n' +
+                            "Digite o número do produto que você deseja alterar: ");
 
                     try {
                         umProduto = produtoDAO.recuperaUmProduto(resposta);
@@ -52,32 +59,44 @@ public class Principal {
                     System.out.println('\n' +
                             "Número = " + umProduto.getId() +
                             "    Nome = " + umProduto.getNome() +
-                            "    Lance Mínimo = " + umProduto.getLanceMinimo());
+                            "    Lance Mínimo = " + umProduto.getLanceMinimo() +
+                            "    Versão = " + umProduto.getVersao());
 
                     System.out.println('\n' + "O que você deseja alterar?");
                     System.out.println('\n' + "1. Nome");
                     System.out.println("2. Lance Mínimo");
 
-                    int opcaoAlteracao = Console.readInt('\n' + "Digite um número de 1 a 2:");
+                    int opcaoAlteracao = Console.readInt('\n' +
+                            "Digite um número de 1 a 2:");
 
                     switch (opcaoAlteracao) {
                         case 1:
-                            String novoNome = Console.readLine("Digite o novo nome: ");
+                            String novoNome = Console.
+                                    readLine("Digite o novo nome: ");
 
                             umProduto.setNome(novoNome);
 
                             try {
                                 produtoDAO.altera(umProduto);
 
-                                System.out.println('\n' + "Alteração de nome efetuada com sucesso!");
+                                System.out.println('\n' +
+                                        "Alteração de nome efetuada com sucesso!");
                             } catch (ProdutoNaoEncontradoException e) {
                                 System.out.println('\n' + e.getMessage());
+                            }
+//==>
+                            catch (EstadoDeObjetoObsoletoException e) {
+                                System.out.println('\n' + "A operação não foi " +
+                                        "efetuada: os dados que você " +
+                                        "tentou salvar foram modificados " +
+                                        "por outro usuário.");
                             }
 
                             break;
 
                         case 2:
-                            double novoLanceMinimo = Console.readDouble("Digite o novo lance mínimo: ");
+                            double novoLanceMinimo = Console.
+                                    readDouble("Digite o novo lance mínimo: ");
 
                             umProduto.setLanceMinimo(novoLanceMinimo);
 
@@ -90,6 +109,13 @@ public class Principal {
                             } catch (ProdutoNaoEncontradoException e) {
                                 System.out.println('\n' + e.getMessage());
                             }
+//==>
+                            catch (EstadoDeObjetoObsoletoException e) {
+                                System.out.println('\n' + "A operação não foi " +
+                                        "efetuada: os dados que você " +
+                                        "tentou salvar foram modificados " +
+                                        "por outro usuário.");
+                            }
 
                             break;
 
@@ -101,7 +127,8 @@ public class Principal {
                 }
 
                 case 3: {
-                    int resposta = Console.readInt('\n' + "Digite o número do produto que você deseja remover: ");
+                    int resposta = Console.readInt('\n' +
+                            "Digite o número do produto que você deseja remover: ");
 
                     try {
                         umProduto = produtoDAO.recuperaUmProduto(resposta);
@@ -112,19 +139,23 @@ public class Principal {
 
                     System.out.println('\n' +
                             "Número = " + umProduto.getId() +
-                            "    Nome = " + umProduto.getNome());
+                            "    Nome = " + umProduto.getNome() +
+                            "    Versão = " + umProduto.getVersao());
 
-                    String resp = Console.readLine('\n' + "Confirma a remoção do produto?");
+                    String resp = Console.readLine('\n' +
+                            "Confirma a remoção do produto?");
 
                     if (resp.equals("s")) {
                         try {
                             produtoDAO.exclui(umProduto.getId());
-                            System.out.println('\n' + "Produto removido com sucesso!");
+                            System.out.println('\n' +
+                                    "Produto removido com sucesso!");
                         } catch (ProdutoNaoEncontradoException e) {
                             System.out.println('\n' + e.getMessage());
                         }
                     } else {
-                        System.out.println('\n' + "Produto não removido.");
+                        System.out.println('\n' +
+                                "Produto não removido.");
                     }
 
                     break;
@@ -138,7 +169,8 @@ public class Principal {
                                 "Id = " + produto.getId() +
                                 "  Nome = " + produto.getNome() +
                                 "  Lance mínimo = " + produto.getLanceMinimo() +
-                                "  Data Cadastro = " + produto.getDataCadastroMasc());
+                                "  Data Cadastro = " + produto.getDataCadastroMasc() +
+                                "  Versão = " + produto.getVersao());
                     }
 
                     break;
