@@ -22,7 +22,7 @@ public class Produto {
     private Date dataCadastro;
     private Date dataVenda;
 
-//==>
+    //==>
     private int versao;
 
     // ********* Construtores *********
@@ -103,6 +103,15 @@ public class Produto {
 
     public void setDataVenda(Date dataVenda) {
         this.dataVenda = dataVenda;
+    }
+
+    @Version
+    public int getVersao() {
+        return versao;
+    }
+
+    public void setVersao(int versao) {
+        this.versao = versao;
     }
 }
 
