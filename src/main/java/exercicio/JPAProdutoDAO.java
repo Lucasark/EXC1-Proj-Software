@@ -14,7 +14,15 @@ public class JPAProdutoDAO implements ProdutoDAO {
 
         try {
 //			transiente - objeto novo: ainda não persistente
-//			persistente - apos ser persistido
+            em = FabricaDeEntityManager.criarSessao();
+            tx = em.getTransaction();
+            tx.begin();
+
+            em.persist(umProduto);
+
+//			persistente - apos ser
+
+            tx.commit();
 //			destacado - objeto persistente não vinculado a um entity manager
 
             return umProduto.getId();
@@ -23,12 +31,12 @@ public class JPAProdutoDAO implements ProdutoDAO {
                 try {
                     tx.rollback();
                 } catch (RuntimeException he) {
-
+                    System.out.print(he);
                 }
             }
             throw e;
         } finally {
-
+            em.close();
         }
     }
 
@@ -40,12 +48,16 @@ public class JPAProdutoDAO implements ProdutoDAO {
             em = FabricaDeEntityManager.criarSessao();
             tx = em.getTransaction();
             tx.begin();
-//==>
+
+            produto = em.find(Produto.class, umProduto.getId(), LockModeType.PESSIMISTIC_WRITE);
+
             if (produto == null) {
-//==>
-//==>
+                tx.rollback();
+                throw new ProdutoNaoEncontradoException("Produto nao encontrado");
             }
-//==>
+
+            em.merge(umProduto);
+
             tx.commit();
         } catch (RuntimeException e) {
             if (tx != null) {
@@ -70,15 +82,15 @@ public class JPAProdutoDAO implements ProdutoDAO {
             tx = em.getTransaction();
             tx.begin();
             Produto produto = em.find(Produto.class, new Long(numero), LockModeType.PESSIMISTIC_WRITE);
-//==>
 
             if (produto == null) {
                 tx.rollback();
                 throw new ProdutoNaoEncontradoException("Produto não encontrado");
             }
 
-//==>
+            em.remove(produto);
             tx.commit();
+
         } catch (RuntimeException e) {
             if (tx != null) {
                 try {
@@ -120,15 +132,13 @@ public class JPAProdutoDAO implements ProdutoDAO {
 //
         try {
             em = FabricaDeEntityManager.criarSessao();
-//
-//==>
-//
-//			// Retorna um List vazio caso a tabela correspondente esteja vazia.
+            // Retorna um List vazio caso a tabela correspondente esteja vazia.
+            @SuppressWarnings("unchecked")
+            List<Produto> produtos = em.createQuery("select p from Produto p order by p.id").getResultList();
 
-//            return produtos;
+            return produtos;
         } finally {
             em.close();
         }
-        return null;
     }
 }

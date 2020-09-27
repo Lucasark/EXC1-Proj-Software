@@ -1,16 +1,17 @@
 package exercicio;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import java.sql.Date;
 
 import javax.persistence.*;
 
 
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "produto")
-//@SequenceGenerator(name = "SEQUENCIA",
-//        sequenceName = "SEQ_PRODUTO",
-//        allocationSize = 1)
-
 public class Produto {
     private Long id;
     private String nome;
