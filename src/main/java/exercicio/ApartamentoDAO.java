@@ -6,9 +6,9 @@ import java.util.List;
 public interface ApartamentoDAO {
     long inclui(Apartamento umApartamento);
 
-//    void altera(Produto umProduto)
-//            throws ProdutoNaoEncontradoException;
-//
+    void altera(Apartamento umApartamento)
+            throws AptNaoEncontradoException;
+
     void exclui(long id)
             throws AptNaoEncontradoException;
 

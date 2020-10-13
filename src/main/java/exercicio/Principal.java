@@ -40,55 +40,50 @@ public class Principal {
                     break;
                 }
 
-//                case 2: {
-//                    int resposta = Console.readInt('\n' +
-//                            "Digite o número do produto que você deseja alterar: ");
-//
-//                    try {
-//                        umProduto = produtoDAO.recuperaUmProduto(resposta);
-//                    } catch (ProdutoNaoEncontradoException e) {
-//                        System.out.println('\n' + e.getMessage());
-//                        break;
-//                    }
-//
-//                    System.out.println('\n' +
-//                            "Número = " + umProduto.getId() +
-//                            "    Nome = " + umProduto.getNome() +
-//                            "    Lance Mínimo = " + umProduto.getLanceMinimo() +
-//                            "    Versão = " + umProduto.getVersao());
-//
-//                    System.out.println('\n' + "O que você deseja alterar?");
-//                    System.out.println('\n' + "1. Nome");
-//                    System.out.println("2. Lance Mínimo");
-//
-//                    int opcaoAlteracao = Console.readInt('\n' +
-//                            "Digite um número de 1 a 2:");
-//
-//                    switch (opcaoAlteracao) {
-//                        case 1:
-//                            String novoNome = Console.
-//                                    readLine("Digite o novo nome: ");
-//
-//                            umProduto.setNome(novoNome);
-//
-//                            try {
-//                                produtoDAO.altera(umProduto);
-//
-//                                System.out.println('\n' +
-//                                        "Alteração de nome efetuada com sucesso!");
-//                            } catch (ProdutoNaoEncontradoException e) {
-//                                System.out.println('\n' + e.getMessage());
-//                            }
-////==>
-//                            catch (EstadoDeObjetoObsoletoException e) {
-//                                System.out.println('\n' + "A operação não foi " +
-//                                        "efetuada: os dados que você " +
-//                                        "tentou salvar foram modificados " +
-//                                        "por outro usuário.");
-//                            }
-//
-//                            break;
-//
+                case 2: {
+                    int resposta = Console.readInt('\n' + "Digite o ID do apartamento que você deseja alterar: ");
+
+                    try {
+                        umApartamento = apartamentoDAO.recuperaUmApartamento(resposta);
+                    } catch (AptNaoEncontradoException e) {
+                        System.out.println('\n' + e.getMessage());
+                        break;
+                    }
+
+                    System.out.println('\n' +
+                            "Id = " + umApartamento.getId() +
+                            "  Numero = " + umApartamento.getNumero() +
+                            "  Andar = " + umApartamento.getAndar() +
+                            "  Bloco = " + umApartamento.getBloco());
+
+                    System.out.println('\n' + "O que você deseja alterar?");
+                    System.out.println("1. Numero");
+                    System.out.println("2. Andar");
+                    System.out.println("3. Bloco");
+
+                    int opcaoAlteracao = Console.readInt('\n' + "Digite um número de 1 a 3:");
+
+                    switch (opcaoAlteracao) {
+                        case 1:
+                            String novoNome = Console.readLine("Digite o novo numero: ");
+
+                            umApartamento.setNumero(novoNome);
+
+                            try {
+                                apartamentoDAO.altera(umApartamento);
+
+                                System.out.println('\n' + "Alteração de nome efetuada com sucesso!");
+                            } catch (AptNaoEncontradoException e) {
+                                System.out.println('\n' + e.getMessage());
+                            } catch (EstadoDeObjetoObsoletoException e) {
+                                System.out.println('\n' + "A operação não foi " +
+                                        "efetuada: os dados que você " +
+                                        "tentou salvar foram modificados " +
+                                        "por outro usuário.");
+                            }
+
+                            break;
+
 //                        case 2:
 //                            double novoLanceMinimo = Console.
 //                                    readDouble("Digite o novo lance mínimo: ");
@@ -104,7 +99,7 @@ public class Principal {
 //                            } catch (ProdutoNaoEncontradoException e) {
 //                                System.out.println('\n' + e.getMessage());
 //                            }
-////==>
+//
 //                            catch (EstadoDeObjetoObsoletoException e) {
 //                                System.out.println('\n' + "A operação não foi " +
 //                                        "efetuada: os dados que você " +
@@ -113,16 +108,16 @@ public class Principal {
 //                            }
 //
 //                            break;
-//
-//                        default:
-//                            System.out.println('\n' + "Opção inválida!");
-//                    }
-//
-//                    break;
-//                }
+
+                        default:
+                            System.out.println('\n' + "Opção inválida!");
+                    }
+
+                    break;
+                }
 //
                 case 3: {
-                    int resposta = Console.readInt('\n' + "Digite o número do produto que você deseja remover: ");
+                    int resposta = Console.readInt('\n' + "Digite o ID do apartamento que você deseja remover: ");
                     try {
                         umApartamento = apartamentoDAO.recuperaUmApartamento(resposta);
                     } catch (AptNaoEncontradoException e) {
@@ -137,17 +132,17 @@ public class Principal {
                             "  Bloco = " + umApartamento.getBloco() +
                             "  Versão = " + umApartamento.getVersao());
 
-                    String resp = Console.readLine('\n' + "Confirma a remoção do produto?");
+                    String resp = Console.readLine('\n' + "Confirma a remoção do apartamento?");
 
                     if (resp.equals("s") || resp.equals("sim") || resp.equals("S") || resp.equals("Sim")) {
                         try {
                             apartamentoDAO.exclui(umApartamento.getId());
-                            System.out.println('\n' + "Produto removido com sucesso!");
+                            System.out.println('\n' + "Apartamento removido com sucesso!");
                         } catch (AptNaoEncontradoException e) {
                             System.out.println('\n' + e.getMessage());
                         }
                     } else {
-                        System.out.println('\n' + "Produto não removido.");
+                        System.out.println('\n' + "Apartamento não removido.");
                     }
 
                     break;

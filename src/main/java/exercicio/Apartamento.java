@@ -1,9 +1,14 @@
 package exercicio;
 
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "apartamento")
 
 public class Apartamento {
