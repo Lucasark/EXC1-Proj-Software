@@ -65,9 +65,9 @@ public class Principal {
 
                     switch (opcaoAlteracao) {
                         case 1:
-                            String novoNome = Console.readLine("Digite o novo numero: ");
+                            String newNumero = Console.readLine("Digite o novo numero: ");
 
-                            umApartamento.setNumero(novoNome);
+                            umApartamento.setNumero(newNumero);
 
                             try {
                                 apartamentoDAO.altera(umApartamento);
