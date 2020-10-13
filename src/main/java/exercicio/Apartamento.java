@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "apartamento")
 
-public class Apt {
+public class Apartamento {
     private Long id;
     private String numero;
     private String bloco;
@@ -14,12 +14,12 @@ public class Apt {
 
     private int versao;
 
-    public Apt() {
+    public Apartamento() {
     }
 
-    public Apt(String numero,
-               String bloco,
-               String andar) {
+    public Apartamento(String numero,
+                       String bloco,
+                       String andar) {
         this.numero = numero;
         this.bloco = bloco;
         this.andar = andar;

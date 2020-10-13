@@ -5,11 +5,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.LockModeType;
-import javax.persistence.OptimisticLockException;
 
-public class AptDAOImpl implements AptDAO {
-    public long inclui(Apt umApt) {
+public class ApartamentoDAOImpl implements ApartamentoDAO {
+    public long inclui(Apartamento umApartamento) {
         EntityManager em = null;
         EntityTransaction tx = null;
 
@@ -18,11 +16,11 @@ public class AptDAOImpl implements AptDAO {
             em = FabricaDeEntityManager.criarSessao();
             tx = em.getTransaction();
             tx.begin();
-            System.out.print(umApt);
-            em.persist(umApt);
+            System.out.print(umApartamento);
+            em.persist(umApartamento);
 
             tx.commit();
-            return umApt.getId();
+            return umApartamento.getId();
         } catch (RuntimeException e) {
             if (tx != null) {
                 try {
@@ -148,13 +146,13 @@ public class AptDAOImpl implements AptDAO {
 //    }
 //
     @SuppressWarnings("unchecked")
-    public List<Apt> recuperaApts() {
+    public List<Apartamento> recuperaApts() {
         EntityManager em = null;
 
         try {
             em = FabricaDeEntityManager.criarSessao();
 
-            List<Apt> apartamentos = em
+            List<Apartamento> apartamentos = em
                     .createQuery("select a from Apartamento a order by a.id")
                     .getResultList();
 

@@ -10,9 +10,9 @@ public class Principal {
         String numero;
         String bloco;
         String andar;
-        Apt umApt;
+        Apartamento umApartamento;
 
-        AptDAO aptDAO = FabricaDeDAOs.getDAO(AptDAO.class);
+        ApartamentoDAO apartamentoDAO = FabricaDeDAOs.getDAO(ApartamentoDAO.class);
 
         boolean continua = true;
         while (continua) {
@@ -31,9 +31,9 @@ public class Principal {
                     bloco = Console.readLine("Bloco Apt: ");
                     andar = Console.readLine("Andar Apt: ");
 
-                    umApt = new Apt(numero, bloco, andar);
+                    umApartamento = new Apartamento(numero, bloco, andar);
 
-                    long id = aptDAO.inclui(umApt);
+                    long id = apartamentoDAO.inclui(umApartamento);
 
                     System.out.println('\n' + "Produto número " + id + " incluído com sucesso!");
 
@@ -157,15 +157,15 @@ public class Principal {
 //                }
 //
                 case 4: {
-                    List<Apt> apartamentos = aptDAO.recuperaApts();
+                    List<Apartamento> apartamentos = apartamentoDAO.recuperaApts();
 
-                    for (Apt apt : apartamentos) {
+                    for (Apartamento apartamento : apartamentos) {
                         System.out.println('\n' +
-                                "Id = " + apt.getId() +
-                                "  Numero = " + apt.getNumero() +
-                                "  Andar = " + apt.getAndar() +
-                                "  Bloco = " + apt.getBloco() +
-                                "  Versão = " + apt.getVersao());
+                                "Id = " + apartamento.getId() +
+                                "  Numero = " + apartamento.getNumero() +
+                                "  Andar = " + apartamento.getAndar() +
+                                "  Bloco = " + apartamento.getBloco() +
+                                "  Versão = " + apartamento.getVersao());
                     }
 
                     break;

@@ -3,8 +3,8 @@ package exercicio;
 import java.util.List;
 
 
-public interface AptDAO {
-    long inclui(Apt umApt);
+public interface ApartamentoDAO {
+    long inclui(Apartamento umApartamento);
 
 //    void altera(Produto umProduto)
 //            throws ProdutoNaoEncontradoException;
@@ -15,5 +15,5 @@ public interface AptDAO {
 //    Produto recuperaUmProduto(long numero)
 //            throws ProdutoNaoEncontradoException;
 //
-    List<Apt> recuperaApts();
+    List<Apartamento> recuperaApts();
 }
