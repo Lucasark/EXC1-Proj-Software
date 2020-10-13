@@ -121,41 +121,38 @@ public class Principal {
 //                    break;
 //                }
 //
-//                case 3: {
-//                    int resposta = Console.readInt('\n' +
-//                            "Digite o número do produto que você deseja remover: ");
-//
-//                    try {
-//                        umProduto = produtoDAO.recuperaUmProduto(resposta);
-//                    } catch (ProdutoNaoEncontradoException e) {
-//                        System.out.println('\n' + e.getMessage());
-//                        break;
-//                    }
-//
-//                    System.out.println('\n' +
-//                            "Número = " + umProduto.getId() +
-//                            "    Nome = " + umProduto.getNome() +
-//                            "    Versão = " + umProduto.getVersao());
-//
-//                    String resp = Console.readLine('\n' +
-//                            "Confirma a remoção do produto?");
-//
-//                    if (resp.equals("s")) {
-//                        try {
-//                            produtoDAO.exclui(umProduto.getId());
-//                            System.out.println('\n' +
-//                                    "Produto removido com sucesso!");
-//                        } catch (ProdutoNaoEncontradoException e) {
-//                            System.out.println('\n' + e.getMessage());
-//                        }
-//                    } else {
-//                        System.out.println('\n' +
-//                                "Produto não removido.");
-//                    }
-//
-//                    break;
-//                }
-//
+                case 3: {
+                    int resposta = Console.readInt('\n' + "Digite o número do produto que você deseja remover: ");
+                    try {
+                        umApartamento = apartamentoDAO.recuperaUmApartamento(resposta);
+                    } catch (AptNaoEncontradoException e) {
+                        System.out.println('\n' + e.getMessage());
+                        break;
+                    }
+
+                    System.out.println('\n' +
+                            "Id = " + umApartamento.getId() +
+                            "  Numero = " + umApartamento.getNumero() +
+                            "  Andar = " + umApartamento.getAndar() +
+                            "  Bloco = " + umApartamento.getBloco() +
+                            "  Versão = " + umApartamento.getVersao());
+
+                    String resp = Console.readLine('\n' + "Confirma a remoção do produto?");
+
+                    if (resp.equals("s") || resp.equals("sim") || resp.equals("S") || resp.equals("Sim")) {
+                        try {
+                            apartamentoDAO.exclui(umApartamento.getId());
+                            System.out.println('\n' + "Produto removido com sucesso!");
+                        } catch (AptNaoEncontradoException e) {
+                            System.out.println('\n' + e.getMessage());
+                        }
+                    } else {
+                        System.out.println('\n' + "Produto não removido.");
+                    }
+
+                    break;
+                }
+
                 case 4: {
                     List<Apartamento> apartamentos = apartamentoDAO.recuperaApts();
 

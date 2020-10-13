@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.LockModeType;
 
 public class ApartamentoDAOImpl implements ApartamentoDAO {
     public long inclui(Apartamento umApartamento) {
@@ -76,75 +77,55 @@ public class ApartamentoDAOImpl implements ApartamentoDAO {
 //        }
 //    }
 //
-//    public void exclui(long numero) throws ProdutoNaoEncontradoException
-//    {	EntityManager em = null;
-//        EntityTransaction tx = null;
-//
-//        try
-//        {
-//            em = FabricaDeEntityManager.criarSessao();
-//            tx = em.getTransaction();
-//            tx.begin();
-//
-//            Produto produto = em.find(Produto.class, numero, LockModeType.PESSIMISTIC_WRITE);
-//
-//            if(produto == null)
-//            {	tx.rollback();
-//                throw new ProdutoNaoEncontradoException("Produto n?o encontrado");
-//            }
-//
-//            // COMO PARA REMOVER UM PRODUTO NA JPA ? PRECISO PRIMEIRAMENTE
-//            // RECUPER?-LO, QUANDO O  PRODUTO ?  RECUPERADO SEU N?MERO  DE
-//            // VERS?O  J?  ATUALIZADO  VEM  JUNTO,  O  QUE  FAZ  COM QUE O
-//            // CONTROLE DE VERS?O N?O FUNCIONE SE A REMO??O ACONTECER AP?S
-//            // UMA ATUALIZA??O, OU SE OCORREREM DUAS REMO??ES EM  PARALELO
-//            // DO MESMO PRODUTO.
-//
-//            // LOGO, A  EXCE??O  OptimisticLockException NUNCA  ACONTECER?
-//            // NO CASO DE REMO??ES.
-//
-//            em.remove(produto);
-//
-//            tx.commit();
-//        }
-//        catch(RuntimeException e)
-//        {
-//            if (tx != null)
-//            {   try
-//            {	tx.rollback();
-//            }
-//            catch(RuntimeException he)
-//            { }
-//            }
-//            throw e;
-//        }
-//        finally
-//        {   em.close();
-//        }
-//    }
-//
-//    public Produto recuperaUmProduto(long numero) throws ProdutoNaoEncontradoException
-//    {	EntityManager em = null;
-//
-//        try
-//        {	em = FabricaDeEntityManager.criarSessao();
-//
-//            Produto umProduto = em.find(Produto.class, numero);
-//
-//            // Caracter?sticas no m?todo find():
-//            // 1. ? gen?rico: n?o requer um cast.
-//            // 2. Retorna null caso a linha n?o seja encontrada no banco.
-//
-//            if(umProduto == null)
-//            {	throw new ProdutoNaoEncontradoException("Produto n?o encontrado");
-//            }
-//            return umProduto;
-//        }
-//        finally
-//        {   em.close();
-//        }
-//    }
-//
+    public void exclui(long numero) throws AptNaoEncontradoException {
+        EntityManager em = null;
+        EntityTransaction tx = null;
+
+        try {
+            em = FabricaDeEntityManager.criarSessao();
+            tx = em.getTransaction();
+            tx.begin();
+
+            Apartamento produto = em.find(Apartamento.class, numero, LockModeType.PESSIMISTIC_WRITE);
+
+            if (produto == null) {
+                tx.rollback();
+                throw new AptNaoEncontradoException("Produto não encontrado");
+            }
+
+            em.remove(produto);
+
+            tx.commit();
+        } catch (RuntimeException e) {
+            if (tx != null) {
+                try {
+                    tx.rollback();
+                } catch (RuntimeException he) {
+                }
+            }
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+
+    public Apartamento recuperaUmApartamento(long numero) throws AptNaoEncontradoException {
+        EntityManager em = null;
+
+        try {
+            em = FabricaDeEntityManager.criarSessao();
+
+            Apartamento umApartamento = em.find(Apartamento.class, numero);
+
+            if (umApartamento == null) {
+                throw new AptNaoEncontradoException("Produto não encontrado");
+            }
+            return umApartamento;
+        } finally {
+            em.close();
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public List<Apartamento> recuperaApts() {
         EntityManager em = null;

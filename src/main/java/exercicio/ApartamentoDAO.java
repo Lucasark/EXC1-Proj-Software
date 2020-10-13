@@ -9,11 +9,11 @@ public interface ApartamentoDAO {
 //    void altera(Produto umProduto)
 //            throws ProdutoNaoEncontradoException;
 //
-//    void exclui(long id)
-//            throws ProdutoNaoEncontradoException;
-//
-//    Produto recuperaUmProduto(long numero)
-//            throws ProdutoNaoEncontradoException;
-//
+    void exclui(long id)
+            throws AptNaoEncontradoException;
+
+    Apartamento recuperaUmApartamento(long numero)
+            throws AptNaoEncontradoException;
+
     List<Apartamento> recuperaApts();
 }
