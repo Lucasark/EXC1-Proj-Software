@@ -1,15 +1,15 @@
 package exercicio;
 
-public class ProdutoNaoEncontradoException extends Exception {
+public class AptNaoEncontradoException extends Exception {
     private final static long serialVersionUID = 1;
 
     private int codigo;
 
-    public ProdutoNaoEncontradoException(String msg) {
+    public AptNaoEncontradoException(String msg) {
         super(msg);
     }
 
-    public ProdutoNaoEncontradoException(int codigo, String msg) {
+    public AptNaoEncontradoException(int codigo, String msg) {
         super(msg);
         this.codigo = codigo;
     }

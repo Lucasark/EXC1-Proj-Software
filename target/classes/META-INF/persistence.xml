@@ -14,9 +14,9 @@
 			<property name="hibernate.format_sql"            value="true"/>
 
             <property name="javax.persistence.jdbc.driver"   value="com.mysql.cj.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url"      value="jdbc:mysql://localhost:3306/banco?autoReconnect=true&amp;useSSL=false&amp;useTimezone=true&amp;serverTimezone=UTC" />
-            <property name="javax.persistence.jdbc.user"     value="teste"/>
-            <property name="javax.persistence.jdbc.password" value="teste"/> 
+            <property name="javax.persistence.jdbc.url"      value="jdbc:mysql://localhost:3306/encomendas?autoReconnect=true&amp;useSSL=false&amp;useTimezone=true&amp;serverTimezone=UTC" />
+            <property name="javax.persistence.jdbc.user"     value="root"/>
+            <property name="javax.persistence.jdbc.password" value="12345678"/>
 
 			<property name="hibernate.dialect"               value="org.hibernate.dialect.MySQLDialect"/>
 		</properties>
