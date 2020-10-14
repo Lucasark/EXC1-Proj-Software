@@ -84,30 +84,49 @@ public class Principal {
 
                             break;
 
-//                        case 2:
-//                            double novoLanceMinimo = Console.
-//                                    readDouble("Digite o novo lance mínimo: ");
-//
-//                            umProduto.setLanceMinimo(novoLanceMinimo);
-//
-//                            try {
-//                                produtoDAO.altera(umProduto);
-//
-//                                System.out.println('\n' +
-//                                        "Alteração de lance mínimo efetuada " +
-//                                        "com sucesso!");
-//                            } catch (ProdutoNaoEncontradoException e) {
-//                                System.out.println('\n' + e.getMessage());
-//                            }
-//
-//                            catch (EstadoDeObjetoObsoletoException e) {
-//                                System.out.println('\n' + "A operação não foi " +
-//                                        "efetuada: os dados que você " +
-//                                        "tentou salvar foram modificados " +
-//                                        "por outro usuário.");
-//                            }
-//
-//                            break;
+                        case 2:
+                            String novoAndar = Console.readLine("Digite o novo Andar: ");
+
+                            umApartamento.setAndar(novoAndar);
+
+                            try {
+                                apartamentoDAO.altera(umApartamento);
+
+                                System.out.println('\n' +
+                                        "Alteração de andar efetuada " +
+                                        "com sucesso!");
+                            } catch (AptNaoEncontradoException e) {
+                                System.out.println('\n' + e.getMessage());
+                            } catch (EstadoDeObjetoObsoletoException e) {
+                                System.out.println('\n' + "A operação não foi " +
+                                        "efetuada: os dados que você " +
+                                        "tentou salvar foram modificados " +
+                                        "por outro usuário.");
+                            }
+
+                            break;
+
+                        case 3:
+                            String novoBloco = Console.readLine("Digite o novo Bloco: ");
+
+                            umApartamento.setBloco(novoBloco);
+
+                            try {
+                                apartamentoDAO.altera(umApartamento);
+
+                                System.out.println('\n' +
+                                        "Alteração de bloco efetuada " +
+                                        "com sucesso!");
+                            } catch (AptNaoEncontradoException e) {
+                                System.out.println('\n' + e.getMessage());
+                            } catch (EstadoDeObjetoObsoletoException e) {
+                                System.out.println('\n' + "A operação não foi " +
+                                        "efetuada: os dados que você " +
+                                        "tentou salvar foram modificados " +
+                                        "por outro usuário.");
+                            }
+
+                            break;
 
                         default:
                             System.out.println('\n' + "Opção inválida!");
